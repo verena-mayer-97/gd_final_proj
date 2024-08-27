@@ -1,0 +1,72 @@
+# Show how it works
+
+# gender
+
+Ella come el plato delicioso
+
+# She eats the [delicious dish (Sg masc)]
+
+Ella come la comida deliciosa
+
+# She eats the [delicious food (Sg fem)]
+
+Ella come los platos deliciosos
+
+# She eats the [delicious dishes (Pl masc)]
+
+Ella come las comidas deliciosas
+
+# She eats the [delicious foods (Pl fem)]
+
+come el blanco churro rico
+
+# An objective and subjective adjective in front and after the noun
+
+# Pro drop
+
+La bonita mujer come 
+
+# The beautiful woman eats
+
+Ella come el plato
+
+# She eats the dish
+
+come el plato
+
+# (Pron3PSg dropped) eats the dish
+
+comen las comidas ricas
+
+# (Pron3PPl dropped) eat the tasty dishes
+
+
+# Incorrect sentences
+
+# Pronoun/ Verb, number agr.: 
+
+Yo come una casa bonita 
+
+#I (Pron1PSg) eat (V3PSg) a big house. "Come" should be "como" to match the subject"
+
+Nosotras come el arroz blanco
+
+# We (Pron1PPl) eat (V3PSg) the white rice. "Come" should be "comemos" to match the first-person plural subject: 
+
+# Determiner/ noun, gender and number agr.: 
+
+Ella come el comidas deliciosa
+
+# She eats the (DetSgMasc) delicious (AdjSgFem) foods (NSgFem). "el" should be "las" to match the plural feminine noun: Ella come las comidas 
+
+# Remaining challenges: Sentences that should not work, but do
+
+la deliciosa comida deliciosa come 
+
+# the delicious food delicious eats
+
+# Two Adj in pre- and postnominal position
+
+La bonita mujer bonita come
+
+# cf. sentence above, but with a verb

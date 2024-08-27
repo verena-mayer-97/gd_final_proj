@@ -1,0 +1,307 @@
+DEMO   SPANISH   CONFIG (1.0)
+ROOTCAT   ROOT.
+FILES  .
+LEXENTRIES   (FIRST SPANISH).
+TEMPLATES (DEMO SPANISH).
+RULES   (DEMO SPANISH).
+GOVERNABLERELATIONS    SUBJ OBJ OBJ2 COMP XCOMP OBL-TO.
+SEMANTICFUNCTIONS    ADJUNCT  TOPIC FOCUS POSS STANDARD.
+NONDISTRIBUTIVES    NUM PERS CONJ-FORM.
+EPSILON   e.
+OPTIMALITYORDER NOGOOD +drop +cat.
+
+----
+DEMO   SPANISH   RULES (1.0)
+
+ROOT --> 	{S | Sdrop }.   "prefer without overt pronoun"					
+
+Sdrop --> 	e: 	(^ SUBJ PRED) = 'pro'	"empty category ‘e’ contains relevant information. Will be invisible in the tree"
+				(^ SUBJ PERS) = 3
+				@(OT-MARK drop);
+				VP.         "require 3rd pers subject (Sg and Pl)"
+
+S -->   NP: (^SUBJ) = !   		  
+			(!CASE) = NOM;         "If Subj of given sentence in case NOM, then Subj is part of NP"
+   		  VP: ^=!.
+
+VP --> V: ^=!;
+        (NP: (^ OBJ)=! "direct object"
+		    (!CASE)=acc).
+
+NP -->   "either a full NP or a PRON"
+	  { (D) "optional determiner"
+	  	A*: ! $ (^ ADJUNCT); "TODO Adj. before N: rica comida"
+ 	    N "head of NP"
+		A*: ! $ (^ ADJUNCT)
+		@(OT-MARK cat); "TODO Adj. after N: comida rica, prefer this category"
+ 	    PP*: ! $ (^ ADJUNCT) "PPs modifying NPs"
+		 (! PTYPE) =c sem "have to be semantic"
+ 	    | PRON}.
+
+PP --> {P: ^ = !   "head of PP"
+       (!PTYPE) =c sem;  "semantic type, Adjunct"
+        NP: (^OBJ) = !
+          (!CASE) = acc
+        | P: ^ = !  "or: head of PP"
+          (!PTYPE) =c nosem;  "non-semantic type, OBL"
+        NP		"NP within PP, e.g. in (prep) + the park (NP)"
+      }.
+
+----
+
+DEMO SPANISH TEMPLATES (1.0)
+
+OT-MARK(_mark) = _mark $ o::*.	"template to create OT marks"
+
+PRES3SG =  @(TENSE Pres)
+			      (^SUBJ PERS)= 3
+			      (^SUBJ NUM) = Sg.
+
+COMMON-NOUN-PNC(P N C) =  (^PRED) = 'P'
+                         (^NUM) = N
+                         (^PERS) = 3
+                         (^NTYPE NSYN) = common
+                         (^NTYPE NSEM COMMON)=C.
+
+"template for pronouns of all types"
+
+  PRON(P N PER T) = (^ PRED) = 'P'
+	  (^ NUM) = N
+	  (^ PERS) = PER
+	  (^ PRON-TYPE) = T
+	  (^ NTYPE) = pron.
+
+"transitives use passive frame"
+
+TRANS(P) = @(PASS (^ PRED)='P<(^ SUBJ) (^ OBJ)>').  "subcat frame w. Subj. and Obj. is subject to pass. lexical rule"
+
+TRANS-OPT(P) = { (^ PRED) = 'P<(^SUBJ)(^OBJ)>'   "P is a variable"
+	              | (^ PRED) = 'P<(^SUBJ)>' }.  "this template takes one argument:  P"
+              "{ @(INTRANS P) | @(TRANS P) }."
+
+INTRANS(P) = (^PRED)='P<(^SUBJ)>'.
+
+DITRANS(P) = @(PASS @(DAT-SHIFT (^PRED)='P<(^SUBJ) (^OBJ) (^OBL-TO)>')).
+
+"tense templates"
+
+TENSE(T) = (^ TENSE) = T.  "the more general case"
+
+MOOD(M) = (^ MOOD) = M.
+
+VPAST = @(TENSE past)
+	      @(MOOD indicative).
+
+PRED(P) = (^ PRED) = 'P'.
+
+PASTP = (^ PARTICIPLE) = past.
+
+"Passive"
+
+PASS(FRAME) = { FRAME 		"no passive, just give back subcat frame"
+		          (^ PASSIVE) = - 	"minus = no passive"
+      	      | FRAME 		"if passive"
+    	        (^ PASSIVE) = + "mark as such"
+		          (^ PARTICIPLE) =c past "this can only happen if I have a past participle = constraint"
+    	        (^ OBJ)-->(^ SUBJ) 		"obj goes to subj"
+    	        { (^ SUBJ)-->(^ OBL-AG) 	"either make subj obl-ag"
+    	        | (^ SUBJ)--> NULL 		"or delete"
+    	        }
+              }.
+
+"Dative Shift"
+DAT-SHIFT(SCHEMATA) =
+	{ SCHEMATA
+	| SCHEMATA
+      (^ OBJ)-->(^ OBJ2) "object swapping: The girl gave the dog a bone"
+      (^ OBL-TO)-->(^ OBJ) "The girl gave a bone to the dog."
+	}.
+----
+
+FIRST SPANISH LEXICON (1.0)
+
+" Determiner(s)"
+
+el D *  (^DEF) = +
+		(^ NUM) = Sg
+		(^GEND) = masc. "male det."
+
+El D *  (^DEF) = +
+		(^ NUM) = Sg
+		(^GEND) = masc. "male det."
+
+la D *  (^DEF) = +
+		(^ NUM) = Sg
+		(^GEND) = fem. "female det."
+
+La D *  (^DEF) = +
+		(^ NUM) = Sg
+		(^GEND) = fem. "female det."
+
+los D *  (^DEF) = +
+		(^ NUM) = Pl
+		(^GEND) = masc. "male det."
+
+Los D *  (^DEF) = +
+		(^ NUM) = Pl
+		(^GEND) = masc. "male det."
+
+las D *  (^DEF) = +
+		(^ NUM) = Pl
+		(^GEND) = fem. "female det."
+
+Las D *  (^DEF) = +
+		(^ NUM) = Pl
+		(^GEND) = fem. "female det."
+
+un  D *  (^ DEF) = -   "this indefinite only marks singulars"
+        (^ NUM) = Sg
+		(^GEND) = masc.
+
+Un  D *  (^ DEF) = -   "this indefinite only marks singulars"
+        (^ NUM) = Sg
+		(^GEND) = masc.
+
+una  D *  (^ DEF) = -   "this indefinite only marks singulars"
+        (^ NUM) = Sg
+		(^GEND) = fem.
+
+Una  D *  (^ DEF) = -   "this indefinite only marks singulars"
+        (^ NUM) = Sg
+		(^GEND) = fem.
+
+"Other"
+	"Preposition"
+con P * (^PFORM) = with.
+
+"Nouns"
+	"Common nouns"
+
+
+arroz N * @(COMMON-NOUN-PNC rice Sg count)
+			(^GEND) = masc.
+
+casa N * @(COMMON-NOUN-PNC house Sg count)
+			(^GEND) = fem.
+
+churro N * @(COMMON-NOUN-PNC churro Sg count)
+			(^GEND) = masc.
+
+churros N * @(COMMON-NOUN-PNC churro Pl count)
+			(^GEND) = masc.
+
+comida N * @(COMMON-NOUN-PNC food Sg count)
+			(^GEND) = fem.
+
+comidas N * @(COMMON-NOUN-PNC food Pl count)
+			(^GEND) = fem.
+
+mujer N * @(COMMON-NOUN-PNC woman Sg count)
+			(^GEND) = fem.
+
+mujeres N * @(COMMON-NOUN-PNC woman Pl count)
+			(^GEND) = fem.
+
+gato N * @(COMMON-NOUN-PNC cat Sg count)
+			(^GEND) = masc.
+
+gatos N * @(COMMON-NOUN-PNC cat Sg count)
+			(^GEND) = masc.
+
+plato N * @(COMMON-NOUN-PNC dish Sg count)
+			(^GEND) = masc.
+
+platos	N * @(COMMON-NOUN-PNC dish Pl count)
+			(^GEND) = masc.
+
+"Proper Nouns"
+
+	"Pronouns"
+
+"keep order of template PRON(P N PER T) - N = Sg/pl and PER = 1,2,3"
+
+yo 		PRON * @(PRON I Sg 1 pers).
+
+Yo 		PRON * @(PRON I Sg 1 pers).
+
+ella 	  PRON * @(PRON ella Sg 3 pers).
+
+Ella     PRON * @(PRON ella Sg 3 pers).
+
+ellas    PRON * @(PRON ellas Pl 3 pers).
+
+nosotras      PRON * @(PRON nosotras Pl 1 pers).
+
+Nosotras      PRON * @(PRON nosotras Pl 1 pers).
+
+
+"Adjuncts"
+	"Adjectives"
+
+blanca	A * (^PRED) = 'white'
+				(^GEND) = fem
+				(^NUM) = Sg.
+
+blanco	A * (^PRED) = 'white'
+				(^GEND) = masc
+				(^NUM) = Sg.
+
+bonita	A * (^PRED) = 'pretty'
+				(^GEND) = fem
+				(^NUM) = Sg.
+
+bonito	A * (^PRED) = 'pretty'
+				(^GEND) = masc
+				(^NUM) = Sg.
+
+deliciosa	A * (^PRED) = 'delicious'
+				(^GEND) = fem
+				(^NUM) = Sg.
+
+delicioso	A * (^PRED) = 'delicious'
+				(^GEND) = masc
+				(^NUM) = Sg.  "no need to encode person, ADJ only discriminate number and gender"
+
+deliciosas	A * (^PRED) = 'delicious'
+				(^GEND) = fem
+				(^NUM) = Pl.
+
+deliciosos	A * (^PRED) = 'delicious'
+				(^GEND) = masc
+				(^NUM) = Pl.  "no need to encode person, ADJ only discriminate number and gender"
+
+rica	A * (^PRED) = 'tasty'
+				(^GEND) = fem
+				(^NUM) = Sg.
+
+rico	A * (^PRED) = 'tasty'
+				(^GEND) = masc
+				(^NUM) = Sg.
+
+ricas 	A * (^PRED) = 'delicious'
+				(^GEND) = fem
+				(^NUM) = Pl.
+
+ricos	A * (^PRED) = 'delicious'
+				(^GEND) = masc
+				(^NUM) = Pl.
+
+"Auxiliaries"
+
+
+"Verbs"
+
+
+comer V * @(TRANS-OPT comer).
+
+come  V * @(TRANS-OPT comer)
+          @PRES3SG.
+
+comen  V * @(TRANS-OPT comer).
+
+habla V *    @(TRANS-OPT hablar)  
+   		      @PRES3SG.
+
+hablar V *    @(TRANS-OPT hablar).
+
+----
