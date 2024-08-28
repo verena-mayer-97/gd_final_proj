@@ -85,4 +85,4 @@ No files containing templates, morphological analyzers, etc. have been submitted
 
 ## Note
 
-Please note that when I downloaded the GitHub repository as a ZIP file, the file _grammar\_19.lfg_ could not be accessed from Windows PowerShell whith its containing folder still in my _Downloads_ folder. After extracting the ZIP to another folder on my local computer, the grammar file could be accessed and parsed the testfile as expected. Should or any other error occur during the evaluation of my assignment, please do not hesitate to contact me: verena.2.mayer@uni-konstanz.de
+Please note that when I downloaded the GitHub repository as a ZIP file, the file _grammar\_19.lfg_ could not be accessed from Windows PowerShell with its containing folder still in my _Downloads_ folder. After extracting the ZIP to another folder on my local computer, the grammar file could be accessed and it parsed the testfile as expected. Should this or any other error occur during the evaluation of my assignment, please do not hesitate to contact me: verena.2.mayer@uni-konstanz.de
