@@ -11,7 +11,7 @@
 * Institution: University of Konstanz
 
 ## Contained files
-The file TODO: _grammar\_19.lfg_ contains a simple grammar that parses Spanish sentences. A selection of sentences can be found in TODO: _ts.lfg_.
+The file: _grammar\_19.lfg_ contains a simple grammar that parses Spanish sentences. A selection of sentences can be found in: _ts.lfg_.
 
 ## Phenomena and implementation
 The grammar accounts for _two_ phenomena that distinguish the Spanish from the English language: 
@@ -25,8 +25,9 @@ Example:
 2. Omitted subject: Come (eat, V:3PSg) el (Det Object) churro (Object).
 
 I chose this phenomenon because it is crucial to understanding Spanish sentences. It is important to implement it in a grammar specific to the language, since it does not exist in English. Consequently, a similar sentence in English (sentence 4. marked with an asterisk) would fail to be parsed. Example: 
+
 3. The woman eats the churro.
-4. * Eats the chrurro. 
+4. \* Eats the chrurro. 
 
 ## OT-markers
 
@@ -38,14 +39,17 @@ The following preferences were implemented:
 
 * _+drop_
 
-TODO (challenge or OT mark): I implemented an OT-marker _+cat_ that is supposed to choose the postverbal over the prenominal position for adjectives. It would prefer the construction "comida rica" over "rica comida". The first option is more common in the Spanish language, since prenominal adjectives either tend to be associated with a more subjective reading or carry a distinct meaning than the same phrase with a postverbal adjective.
+I implemented an OT-marker _+cat_ that is supposed to choose the postverbal over the prenominal position for adjectives. It would prefer the construction "comida rica" over "rica comida". The first option is more common in the Spanish language, since prenominal adjectives either tend to be associated with a more subjective reading or carry a distinct meaning than the same phrase with a postverbal adjective.
 In the latter case, both sentences are correct, as shown in the famous example of the two readings of "An old friend" in 5a and 5b:
 
 5a. Una amiga vieja. (Meaning: A friend of old age.)
 
 5b. Una vieja amiga. (Meaning: An friend known for a long time.)
 
-TODO: Furthermore, I implemented an OT-marker _+drop_. It chooses a sentence without a personal pronoun over a sentence with an overt personal pronoun, because the encoding of Number and Person on the verb make the personal pronoun mostly redundant. The parse in example 6. would be preferred over example 7., only if the referent of the pronoun "ella" has been previously introduced:
+However, the OT-marker did not accomplish the desired effect, and thus remains a challenge.
+
+
+Furthermore, I implemented an OT-marker _+drop_. It chooses a sentence without a personal pronoun over a sentence with an overt personal pronoun, because the encoding of Number and Person on the verb make the personal pronoun mostly redundant. The parse in example 6. would be preferred over example 7., but only if the referent of the pronoun "ella" has been previously introduced:
 
 6. Come (eat, V:3PSg) el churro.
 7. Ella (Pron:3PSgFem) come (eat, V:3PSg) el churro.
@@ -73,7 +77,7 @@ Another case can be described as the following: When two _different_ adjectives 
 
 ## Testsuite 
 
-Along with _grammar\_19.lfg_ , a testsuite _ts.lfg_ contating 14 TODO sentences was submitted. It showcases sentences that can be parsed in the first sentences. The second part shows sentences that are ungrammatical and cannot be parsed. To highlight the remaining challenges mentioned above, the last sentences in the testfile are the ones that could be parsed although they are grammatically incorrect.
+Along with _grammar\_19.lfg_ , a testsuite _ts.lfg_ contating 16 sentences was submitted. It showcases sentences that can be parsed in the first sentences. The second part shows sentences that are ungrammatical and cannot be parsed. To highlight the remaining challenges mentioned above, the last sentences in the testfile are the ones that could be parsed although they are grammatically incorrect.
 
 ## Other files
-No files containing templates have been submitted, in order to keep the implications of the Spanish grammar traceable.
+No files containing templates, morphological analyzers, etc. have been submitted, in order to keep the implications of the Spanish grammar traceable.

@@ -16,7 +16,6 @@ DEMO   SPANISH   RULES (1.0)
 ROOT --> 	{S | Sdrop }.   "prefer without overt pronoun"					
 
 Sdrop --> 	e: 	(^ SUBJ PRED) = 'pro'	"empty category ‘e’ contains relevant information. Will be invisible in the tree"
-				(^ SUBJ PERS) = 3
 				@(OT-MARK drop);
 				VP.         "require 3rd pers subject (Sg and Pl)"
 

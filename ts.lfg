@@ -59,6 +59,18 @@ Ella come el comidas deliciosa
 
 # She eats the (DetSgMasc) delicious (AdjSgFem) foods (NSgFem). "el" should be "las" to match the plural feminine noun: Ella come las comidas 
 
+# Only gender agr.: 
+
+Ella come los comidas deliciosas
+
+# She eats the (DetPlMasc) delicious (AdjPlFem) foods (plNFem). While ADJ and N match, Det is the wrong GEND
+
+# Only number agr.:
+
+Ella come las comida
+
+# She eats the (DetPlFem) foods (NSgFem)
+
 # Remaining challenges: Sentences that should not work, but do
 
 la deliciosa comida deliciosa come 
