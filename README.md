@@ -57,7 +57,7 @@ Furthermore, I implemented an OT-marker _+drop_. It chooses a sentence without a
 Methodically, these sentences can be implemented with an empty node that carries the features of the verb it belongs to.  Thus, the sentence with the omitted subject behaves like an imperative sentence in English. To account for the phenomenon, I created a rule "Sdrop" which has the same structure as the "Simp" rule in previous English grammars featured in the Grammar Development course. However, in imperative sentences, the implicit subject is always in second person. Since pro-drop can be used with any person (1, 2, 3), this restriction not featured in the present Spanish grammar.
 
 
-The second phenomenon constitutes the Gender and Number Agreement. While Gender Agreement not exist in English, it affects adjectives, nouns, pronouns and determiners in Spanish. Any Part-Of-Speech governed by the NP must have the same Gender and Number as the noun. This can be observed with the objects "plato" (dish) and "comida" (food) in the following examples from the testsuite:
+The second phenomenon constitutes the Gender and Number Agreement. While Gender Agreement does not exist in English, it affects adjectives, nouns, pronouns and determiners in Spanish. Any Part-Of-Speech governed by the NP must have the same Gender and Number as the noun. This can be observed with the objects "plato" (dish) and "comida" (food) in the following examples from the testsuite:
 
 8.  Ella come el (DetSgMasc) plat-o (NSgMasc) delicios-o (AdjSgMasc).
 
@@ -77,7 +77,7 @@ Another case can be described as the following: When two _different_ adjectives 
 
 ## Testsuite 
 
-Along with _grammar\_19.lfg_ , a testsuite _ts.lfg_ contating 16 sentences was submitted. It showcases sentences that can be parsed in the first sentences. The second part shows sentences that are ungrammatical and cannot be parsed. To highlight the remaining challenges mentioned above, the last sentences in the testfile are the ones that could be parsed although they are grammatically incorrect.
+Along with _grammar\_19.lfg_ , a testsuite _ts.lfg_ contaning 16 sentences was submitted. It showcases sentences that can be parsed in the first sentences. The second part shows sentences that are ungrammatical and cannot be parsed. To highlight the remaining challenges mentioned above, the last sentences in the testfile are the ones that could be parsed although they are grammatically incorrect.
 
 ## Other files
 
